@@ -1,5 +1,5 @@
 document.querySelector("#abc").addEventListener("input", function(e) {
-  const len = e.target.value.length;
+  const len = e.target.value.length / 2;
   const letter = String.fromCharCode(len + 65);
 
   if(len > 25) {
@@ -13,7 +13,7 @@ document.querySelector("#abc").addEventListener("input", function(e) {
 document.querySelector("#submit").addEventListener("click", function(e) {
   e.preventDefault();
   const text = document.querySelector("#input").value.toUpperCase();
-  const dict = document.querySelector("#abc").value.split("");
+  const dict = [...(document.querySelector("#abc").value)];
 
   const result = text.split("").map(char => {
     const code = char.charCodeAt(0);
