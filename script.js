@@ -32,6 +32,42 @@ document.querySelector("#abcInputs").appendChild(input)
 
 }
 
+for(let i = 0; i < 5; i++) {
+const myI = i;
+
+const saveButton = document.createElement("button");
+saveButton.id = `save${myI}`
+saveButton.innerText = `Save ${myI + 1}`
+saveButton.addEventListener("click", (e) => {
+  let asStr = "";
+
+  for(let i = 0; i < 26; i++) {
+    const input = document.getElementById(`abc${i}`);
+    asStr += input.value + "/";
+  };
+
+  localStorage.setItem(`abc${myI}`, asStr.slice(0, -1));
+});
+
+document.querySelector("#save").appendChild(saveButton)
+
+const loadButton = document.createElement("button");
+  loadButton.id = `load${myI}`
+  loadButton.innerText = `Load ${myI + 1}`
+  loadButton.addEventListener("click", (e) => {
+  const storageItem = localStorage.getItem(`abc${myI}`);
+
+    storageItem.split("/").map((item, idx) => {
+      const input = document.getElementById(`abc${idx}`);
+      input.value = item;
+    });
+});
+
+document.querySelector("#load").appendChild(loadButton)
+
+
+}
+
 document.querySelector("#submit").addEventListener("click", function(e) {
 e.preventDefault();
 const text = document.querySelector("#input").value.toUpperCase();
